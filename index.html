@@ -315,9 +315,6 @@ async function loadSiswa(){
 
         console.error(err);
 
-        alert(
-            "Gagal mengambil data siswa"
-        );
 
     }
 
@@ -371,9 +368,6 @@ async function loadMapel(){
 
         console.error(err);
 
-        alert(
-            "Gagal memuat data mapel"
-        );
 
     }
 
@@ -427,9 +421,6 @@ async function loadGuru(){
 
         console.error(err);
 
-        alert(
-            "Gagal memuat data guru"
-        );
 
     }
 
@@ -532,10 +523,6 @@ document.getElementById(
 
 if(!kelas){
 
-    alert(
-        "Pilih kelas"
-    );
-
     return;
 
 }
@@ -545,10 +532,6 @@ if(!kelas){
         if(
             dataSiswa.length === 0
         ){
-
-            alert(
-                "Data siswa belum dimuat"
-            );
 
             return;
 
@@ -593,19 +576,11 @@ if(!kelas){
 
         if(!data.tanggal){
 
-            alert(
-                "Pilih tanggal"
-            );
-
             return;
 
         }
 
         if(!data.jam){
-
-            alert(
-                "Pilih jam"
-            );
 
             return;
 
@@ -613,19 +588,11 @@ if(!kelas){
 
         if(!data.mapel){
 
-            alert(
-                "Pilih mata pelajaran"
-            );
-
             return;
 
         }
 
         if(!data.guru){
-
-            alert(
-                "Pilih guru"
-            );
 
             return;
 
@@ -637,9 +604,6 @@ if(!kelas){
             ).trim()
         ){
 
-            alert(
-                "Materi ajar belum diisi"
-            );
 
             return;
 
@@ -662,9 +626,6 @@ await fetch(
             "success"
         ){
 
-            alert(
-                "Jurnal berhasil disimpan"
-            );
 
         }else{
 
@@ -701,10 +662,6 @@ async function downloadCSV(){
 
     if(!kelas){
 
-        alert(
-            "Pilih kelas"
-        );
-
         return;
 
     }
@@ -716,9 +673,6 @@ async function downloadCSV(){
 
     if(!mapel){
 
-        alert(
-            "Pilih mapel terlebih dahulu"
-        );
 
         return;
 
@@ -759,10 +713,7 @@ async function downloadCSV(){
 
         if(window.Android){
 
-Android.downloadCSV(
-    csv,
-    "Jurnal_" + mapel + "_" + kelas + ".csv"
-);
+Android.downloadCSV(csv);
 
             return;
 
@@ -808,9 +759,6 @@ Android.downloadCSV(
 
         console.error(err);
 
-        alert(
-            "Gagal download CSV"
-        );
 
     }
 
