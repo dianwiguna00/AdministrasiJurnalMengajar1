@@ -265,7 +265,7 @@ Simpan
 <script>
 
 const API =
-"https://script.google.com/macros/s/AKfycbyoBiTyK_dnx0gR0wBRZP2tL6dacfxJPCnyd514G8H4rh4Pg8TZJhqCCweD5cM8RJMryg/exec";
+"https://script.google.com/macros/s/AKfycbwOGoXIzq9RZHhTgobNbp7q8Pp6q-YJabGlMlJhi5_33aVfCVE2p1HZmj5-FsebWvFLqA/exec";
 
 let dataSiswa = [];
 
@@ -573,10 +573,20 @@ if(!kelas){
 deviceId :
 (
     window.Android &&
-    Android.getDeviceId
+    typeof Android.getDeviceId === "function"
 )
 ?
 Android.getDeviceId()
+:
+"",
+
+deviceName :
+(
+    window.Android &&
+    typeof Android.getDeviceName === "function"
+)
+?
+Android.getDeviceName()
 :
 "",
             absensi :
