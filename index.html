@@ -570,7 +570,15 @@ if(!kelas){
             document.getElementById(
                 "materi"
             ).value,
-
+deviceId :
+(
+    window.Android &&
+    Android.getDeviceId
+)
+?
+Android.getDeviceId()
+:
+"",
             absensi :
             dataSiswa
 
