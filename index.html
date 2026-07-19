@@ -265,7 +265,7 @@ Simpan
 <script>
 
 const API =
-"https://script.google.com/macros/s/AKfycbwAFS3bq0RpdiuSDzHxvcGaBiJ2kakZcU8x8fdazAtBmZmA5pipmi0YfDAF-7S8qUIWhg/exec";
+"https://script.google.com/macros/s/AKfycbyrNlt-AIYX7H69NeNEL8FBnofCRh8Evjxr5ZrVr30onHKGKt8O9_AtvuuOqn2G8rNTxw/exec";
 
 let dataSiswa = [];
 
@@ -663,9 +663,7 @@ async function downloadCSV(){
     ).value;
 
     if(!kelas){
-
         return;
-
     }
 
     const mapel =
@@ -673,25 +671,32 @@ async function downloadCSV(){
         "mapel"
     ).value;
 
-    if(!mapel){
-
-
-        return;
-
-    }
-
     try{
 
-        const response =
-        await fetch(
+        let url;
 
+        if(mapel){
+
+            // Download jurnal mapel
+            url =
             API +
             "?rekap=" +
             encodeURIComponent(kelas) +
             "&mapel=" +
-            encodeURIComponent(mapel)
+            encodeURIComponent(mapel);
 
-        );
+        }else{
+
+            // Download jurnal kelas
+            url =
+            API +
+            "?rekapkelas=" +
+            encodeURIComponent(kelas);
+
+        }
+
+        const response =
+        await fetch(url);
 
         const data =
         await response.json();
@@ -715,52 +720,15 @@ async function downloadCSV(){
 
         if(window.Android){
 
-Android.downloadCSV(csv);
+            Android.downloadCSV(csv);
 
             return;
 
         }
 
-        const blob =
-        new Blob(
-            [csv],
-            {
-                type:
-                "text/csv;charset=utf-8;"
-            }
-        );
-
-        const url =
-        URL.createObjectURL(
-            blob
-        );
-
-        const a =
-        document.createElement(
-            "a"
-        );
-
-        a.href = url;
-
-        a.download =
-        "Jurnal_" +
-        mapel +
-        "_" +
-        kelas +
-        ".csv";
-
-        document.body.appendChild(a);
-
-        a.click();
-
-        document.body.removeChild(a);
-
-        URL.revokeObjectURL(url);
-
     }catch(err){
 
         console.error(err);
-
 
     }
 
