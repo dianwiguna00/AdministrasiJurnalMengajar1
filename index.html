@@ -138,6 +138,16 @@ th.sticky-no{
     padding:10px;
     background:white;
 }
+
+.simpan-aktif{
+    background:#198754 !important;
+    color:white !important;
+}
+
+.download-aktif{
+    background:#0d6efd !important;
+    color:white !important;
+}
 </style>
 </head>
 <body>
@@ -230,11 +240,11 @@ id="materi"
 placeholder="Materi Ajar"
 style="height:48px;font-size:20px;padding:10px;"></textarea>
 
-<button onclick="simpan()">
+<button id="btnSimpan" onclick="simpan()">
 💾 Simpan
 </button>
 
-<button onclick="downloadCSV()">
+<button id="btnDownload" onclick="downloadCSV()">
 📥 Download
 </button>
 </div>
@@ -642,20 +652,24 @@ await fetch(
         const hasil =
         await res.json();
 
-        if(
-            hasil.status ===
-            "success"
-        ){
+if(
+    hasil.status ===
+    "success"
+){
 
+    flashButton(
+        "btnSimpan",
+        "simpan-aktif"
+    );
 
-        }else{
+}else{
 
-            throw new Error(
-                hasil.pesan ||
-                "Gagal menyimpan data"
-            );
+    throw new Error(
+        hasil.pesan ||
+        "Gagal menyimpan data"
+    );
 
-        }
+}
 
     }catch(err){
 
@@ -737,13 +751,18 @@ async function downloadCSV(){
         )
         .join("\n");
 
-        if(window.Android){
+if(window.Android){
 
-            Android.downloadCSV(csv);
+    Android.downloadCSV(csv);
 
-            return;
+    flashButton(
+        "btnDownload",
+        "download-aktif"
+    );
 
-        }
+    return;
+
+}
 
     }catch(err){
 
@@ -769,7 +788,18 @@ window.onload = function(){
     loadMapel();
     loadGuru();
 }
+function flashButton(id, kelas){
 
+    const btn =
+    document.getElementById(id);
+
+    btn.classList.add(kelas);
+
+    setTimeout(()=>{
+        btn.classList.remove(kelas);
+    },5000);
+
+}
 </script>
 
 </body>
