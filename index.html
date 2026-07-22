@@ -528,6 +528,11 @@ function setStatus(i,status){
 
 async function simpan(){
 
+    flashButton(
+        "btnSimpan",
+        "simpan-aktif"
+    );
+    
 const kelas =
 document.getElementById(
     "kelas"
@@ -657,10 +662,6 @@ if(
     "success"
 ){
 
-    flashButton(
-        "btnSimpan",
-        "simpan-aktif"
-    );
 
 }else{
 
@@ -690,6 +691,11 @@ if(
 
 async function downloadCSV(){
 
+    flashButton(
+        "btnDownload",
+        "download-aktif"
+    );
+    
     const kelas =
     document.getElementById(
         "kelas"
@@ -754,11 +760,6 @@ async function downloadCSV(){
 if(window.Android){
 
     Android.downloadCSV(csv);
-
-    flashButton(
-        "btnDownload",
-        "download-aktif"
-    );
 
     return;
 
