@@ -751,12 +751,12 @@ async function downloadCSV(){
 
         }
 
-        const csv =
-        data
-        .map(
-            row => row.join(";")
-        )
-        .join("\n");
+const csv = data.map(row => {
+
+  row[2] = '="' + row[2] + '"'; // kolom JAM
+
+  return row.join(";");
+}).join("\n");
 
 if(window.Android){
 
